@@ -11,4 +11,14 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 
     return $response;
 });
+
+$app->post('/test/demo', function(Request $req, Response $res){
+
+    $data = $req->getParsedBody();
+    // $inputdata= [];
+    // $inputdata['name'] = $data['name'];
+    // $inputdata['phone'] = $data['phone'];
+    
+    $res->getBody()->write($data);
+});
 $app->run();
