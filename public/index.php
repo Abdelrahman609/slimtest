@@ -15,10 +15,24 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 $app->post('/test/demo', function(Request $req, Response $res){
 
     $data = $req->getParsedBody();
-    // $inputdata= [];
-    // $inputdata['name'] = $data['name'];
-    // $inputdata['phone'] = $data['phone'];
+    $inputdata= [];
+    $inputdata['name'] = $data['name'];
+    $inputdata['phone'] = $data['phone'];
     
-    $res->getBody()->write($data);
+    $res->getBody()->write('data'.$inputdata['name'] . $inputdata['phone']);
+});
+
+$app->get('/jsontest/{first}/{last}', function($req, $res, $args){
+
+    $firstname = $args['first'];
+    $lastname = $args['last'];
+    $out = [];
+    $out['status'] = 200;
+    $out['message'] = 'done';
+    $out['first'] = $firstname;
+    $out['last'] = $lastname;
+
+    $res->getBody()->write(json_encode($out));
+
 });
 $app->run();
